@@ -1,0 +1,40 @@
+name = "wfs-transporte-avulso"
+pages_build_output_dir = "dist"
+compatibility_date = "2024-09-01"
+
+# BINDING DO CLOUDFLARE KV (Persistência no Edge para Cloudflare Pages)
+# Para vincular no painel do Cloudflare:
+# Pages > seu projeto > Settings > Functions > KV namespace bindings:
+# Variable name: WFS_KV  |  KV namespace: selecione seu namespace criado
+[[kv_namespaces]]
+binding = "WFS_KV"
+id = "ed2e323d6d33451d8830d77dcb21c818"
+
+# Variáveis de ambiente da aplicação
+[vars]
+GOOGLE_SHEETS_ID = "1kyCEVV5pNQS0bqnOCzVcCPF-yVh6fRqqQOOfLqDLhYM"
+VITE_COMPANY_NAME = "WFS - Worldwide Flight Services"
+VITE_AIRPORT_BASE = "Aeroporto Internacional de Guarulhos (GRU)"
+NODE_VERSION = "22"
+
+# =========================================================================
+# SEGURANÇA E SEGREDOS NO CLOUDFLARE PAGES / WORKERS:
+# As variáveis abaixo são sensíveis e devem ser configuradas no painel
+# do Cloudflare (Workers & Pages > wfs-transporte-avulso > Settings > Variables and Secrets)
+# como 'Secret' (criptografadas), ou via Wrangler CLI:
+#
+#   npx wrangler pages secret put AUTH_SECRET
+#   npx wrangler pages secret put MASTER_PASSWORD
+#   npx wrangler pages secret put GOOGLE_SHEETS_WEBHOOK_URL
+#   npx wrangler pages secret put GOOGLE_SHEETS_WEBHOOK_SECRET
+#
+# - AUTH_SECRET: OBRIGATÓRIA. Chave de assinatura dos tokens de login. Sem ela
+#   o sistema recusa qualquer autenticação (não existe mais chave padrão).
+# - MASTER_PASSWORD: OBRIGATÓRIA. Senha do Administrador Master
+#   ivoaltctrl@gmail.com. Não existe senha padrão.
+# - GOOGLE_SHEETS_WEBHOOK_URL: URL do Web App gerado no Google Apps Script (terminada em /exec)
+# - GOOGLE_SHEETS_WEBHOOK_SECRET: OBRIGATÓRIA. Precisa ser idêntica ao WEBHOOK_SECRET
+#   configurado dentro do google-apps-script.js — sem ela, a URL do webhook sozinha
+#   permite ler/apagar a planilha inteira sem login.
+# - MANAGER_PIN: DESCONTINUADA. O atalho por PIN foi removido do sistema.
+# =========================================================================

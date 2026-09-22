@@ -1,0 +1,6 @@
+{
+  "name": "WFS - Sistema de Solicitação de Transporte Avulso",
+  "description": "Sistema para solicitação e gestão de transporte avulso para colaboradores WFS em horários sem transporte público, integrado a Google Sheets.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
